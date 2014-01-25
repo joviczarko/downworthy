@@ -40,18 +40,25 @@
             }
         }
     }
-
+    
     // TODO: Embed a default dictionary in case the JSON doesn't load properly?
-
     function loadDictionary() {
         var xhr = new XMLHttpRequest();
+        
+        //detect language and compile langurl  example: 'dictionaries/en.json' = folder.concat(lang, ext)
+        // List of all return language codes http://src.chromium.org/viewvc/chrome/trunk/src/third_party/cld/languages/internal/languages.cc
+        var folder= "dictionaries/"
+        var ext= ".json"
+        
         xhr.onreadystatechange = function() {
             if(xhr.readyState === 4 && xhr.status === 200) {
                 _dictionary = JSON.parse(xhr.responseText);
             }
         };
+        
         // TODO: Select the JSON file from a value passed into this function.
-        xhr.open("GET", chrome.extension.getURL('dictionaries/original.json'), true);
+        
+        xhr.open("GET", chrome.extension.getURL(folder.concat(chrome.tabs.detectLanguage ();, ext)), true);
         xhr.send();
     }
 
